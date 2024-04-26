@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drag and Drop File Upload</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  #drop-area {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin: 50px auto;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div id="drop-area" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragenter="dragEnterHandler(event);" ondragleave="dragLeaveHandler(event);">
+  <p>Drag & Drop files here or click to select</p>
+</div>
+
+<script>
+function dragOverHandler(event) {
+  event.preventDefault();
+}
+
+function dragEnterHandler(event) {
+  event.preventDefault();
+  document.getElementById("drop-area").style.borderColor = "#008cba";
+}
+
+function dragLeaveHandler(event) {
+  event.preventDefault();
+  document.getElementById("drop-area").style.borderColor = "#ccc";
+}
+
+function dropHandler(event) {
+  event.preventDefault();
+  document.getElementById("drop-area").style.borderColor = "#ccc";
+
+  var fileList = event.dataTransfer.files;
+  var fileListText = "";
+  for (var i = 0; i < fileList.length; i++) {
+    fileListText += fileList[i].name + "<br>";
+  }
+  document.getElementById("drop-area").innerHTML = fileListText;
+}
+</script>
+
+</body>
+</html>
